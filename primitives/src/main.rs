@@ -1,6 +1,9 @@
-fn reverse(pair:(i32,bool))->(bool,i32){
-let (int_param,bool_param) = pair;
-return (bool_param,int_param);
+use std::mem;
+use std::fmt;
+
+fn reverse(pair:(i32,&str))->(&str,i32){
+let (int_param,string_param) = pair;
+return (string_param,int_param);
 }
 
 fn main() {
@@ -41,6 +44,44 @@ fn main() {
 //     println!("Too long tuple: {:?}", too_long_tuple);
 
    //We can also reverse the tuple
-   let straight_tuple = (2,false);
+   let straight_tuple = (2,"zero-knowledge");
    println!("Reversed Tuple is:{:?}", reverse(straight_tuple));
+
+   //tuple destructing
+   let tuple = (false,"zk",1i32,-89i32);
+   let (a,b,c,d) = tuple;
+   println!("a is:{:?} , b is:{:?}, c is {:?}, d is {:?}", a, b, c, d);
+
+#[derive(Debug)]
+   //Structs
+   struct Block(
+      u32,
+      u32,
+      String
+   );
+
+   let new_block: Block = Block(12142,1,String::from("This is block first"));
+
+println!("New Block:{:?}", new_block);
+
+// println!("Inverted Block:{}",transpose(new_block))
+
+//2.3 Arrays
+
+let arr1:[bool;3] = [true,false,false];//prints normal array
+println!("Array 1 is:{:?}",arr1);
+
+let arr2:[bool;500] = [true;500];//prints true 500 times
+// println!("Arrray 2 with 500 elements:{:?}",arr2);
+
+//Indexing
+println!("last elemtn of array1:{}",arr1[2]);//false
+
+//Length of array
+println!("Length of array1:{}",arr1.len());//3
+
+//Arrays are stack allocated, how much bytes occupied
+println!("Bytes occupied by array1:{}",mem::size_of_val(&arr1));//3
+
+
 }
